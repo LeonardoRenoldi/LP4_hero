@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">My Application</string>
+
+    <string-array name="editoras">
+        <item>Editoras</item>
+        <item>Marvel</item>
+        <item>DC Comics</item>
+    </string-array>
+
+    <string-array name="arquetipo">
+        <item>Arquétipo</item>
+        <item>Herói</item>
+        <item>Vilão</item>
+    </string-array>
+</resources>
