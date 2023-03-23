@@ -18,13 +18,20 @@ class LoginActivity : AppCompatActivity() {
 
         binding.loginButton.setOnClickListener{
 
+            val email = binding.emailInput.text.toString()
+            val password = binding.passwordInput.text.toString()
+
+            val sharedPreferences = getSharedPreferences("MY_PRE",Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+
+            editor.putString("EMAIL", email)
+            editor.putString("PASSWORD", password)
+            editor.apply()
+
+
             startActivity(Intent(this@LoginActivity,DescriptionActivity::class.java))
         }
 
-        fun salvarDados(){
-            val saveEmail = binding.emailInput.text.toString()
 
-            val sharedPreferences = getSharedPreferences("Email",Context.MODE_PRIVATE)
-        }
     }
 }
