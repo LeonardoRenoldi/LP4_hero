@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -38,6 +39,25 @@ private lateinit var binding: ActivityDescriptionBinding
             heroTypeSpinner.adapter = adapterHero
         }
 
+
+
+        binding.saveHeroButton.setOnClickListener {
+
+            val nome_heroi = binding.heroName.toString()
+            val idade = binding.heroAge.toString()
+            val descricao = binding.descriptionOfHero.toString()
+
+            val sharedPrefs = getSharedPreferences("REGISTRO_HEROI", Context.MODE_PRIVATE)
+            val editor = sharedPrefs.edit()
+
+            editor.putString("NOME_HEROI", nome_heroi)
+            editor.putString("DESCRICÃO", descricao)
+            editor.putString("IDADE", idade)
+
+            editor.putInt("spinnerSelection", binding.spinnerEditora.selectedItemPosition)
+            editor.putInt("spinnerSelection", binding.spinnerHeroi.selectedItemPosition)
+            editor.apply()
+        }
 
     }
 }
