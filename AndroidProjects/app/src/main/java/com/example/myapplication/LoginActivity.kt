@@ -44,18 +44,11 @@ class LoginActivity : AppCompatActivity() {
 
 
         binding.loginButton.setOnClickListener{
-
-
-
-            val sharedPreferences = getSharedPreferences("LOGIN", MODE_PRIVATE)
-            val editor = sharedPreferences.edit()
-
-            editor.putString("EMAIL", email)
-            editor.putString("PASSWORD", password)
-            editor.apply()
-
-
             startActivity(Intent(this@LoginActivity,DescriptionActivity::class.java))
+        }
+
+        binding.cadastroButton.setOnClickListener {
+            startActivity(Intent(this@LoginActivity,CadastroActivity::class.java))
         }
 
 
