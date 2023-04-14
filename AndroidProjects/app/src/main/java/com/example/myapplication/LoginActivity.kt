@@ -8,7 +8,14 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
+import android.widget.Toast
+import api.endPoint
 import com.example.myapplication.databinding.ActivityLoginBinding
+import model.User
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import utils.NetworkUtils
 
 class LoginActivity : AppCompatActivity() {
 
@@ -27,20 +34,23 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-        botao_login.addTextChangedListener(object : TextWatcher{
+       fun login(){
+       val retrofitClient = NetworkUtils.getRetrofitInstance("https://fundatec.herokuapp.com/user")
+           val endpoint = retrofitClient.create(endPoint::class.java)
 
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
+           val callback = endpoint.autenticacao(email, password)
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                email.trim()
-                password.trim()
-                botao_login.isEnabled = true
-            }
+           callback.enqueue(object : Callback<User>{
+               override fun onResponse(call: Call<User>, response: Response<User>) {
+                   Toast.makeText(baseContext, "Name: ${response.body()?.email}", Toast.LENGTH_LONG).show();
+                   Toast.makeText(baseContext, "Name: ${response.body()?.password}", Toast.LENGTH_LONG).show()
+               }
 
-            override fun afterTextChanged(p0: Editable?) {
-            }
-        })
+               override fun onFailure(call: Call<User>, t: Throwable) {
+                   println("Erro ao realizar o login")
+               }
+           })
+       }
 
 
         binding.loginButton.setOnClickListener{

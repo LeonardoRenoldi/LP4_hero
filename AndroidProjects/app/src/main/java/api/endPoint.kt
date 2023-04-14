@@ -1,16 +1,18 @@
 package api
 
 import com.google.gson.JsonObject
+import model.User
 import retrofit2.Call
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
+import retrofit2.http.Headers
+import retrofit2.http.POST
 
 interface endPoint {
-
-    @GET("https://fundatec.herokuapp.com/herois")
-    fun getHerois(): Call<JsonObject>
-
-    @GET("https://fundatec.herokuapp.com/viloes")
-    fun getViloes(): Call<JsonObject>
+    @FormUrlEncoded
+    @Headers
+    @POST
+   fun autenticacao(email : String, password: String) : Call<User>
 
 
 }

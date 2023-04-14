@@ -54,8 +54,8 @@ private lateinit var binding: ActivityDescriptionBinding
             editor.putString("DESCRICÃO", descricao)
             editor.putString("IDADE", idade)
 
-            editor.putInt("spinnerSelection", binding.spinnerEditora.selectedItemPosition)
-            editor.putInt("spinnerSelection", binding.spinnerHeroi.selectedItemPosition)
+            editor.putString("spinnerSelection", binding.spinnerEditora.getSelectedItem().toString())
+            editor.putString("spinnerSelection", binding.spinnerHeroi.getSelectedItem().toString())
             editor.apply()
         }
 
