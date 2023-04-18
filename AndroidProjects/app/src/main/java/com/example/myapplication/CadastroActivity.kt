@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.myapplication.databinding.ActivityCadastroBinding
+import com.google.gson.Gson
+import model.User
 
 
 class CadastroActivity : AppCompatActivity() {
@@ -17,15 +19,18 @@ class CadastroActivity : AppCompatActivity() {
 
         val emailRegister = binding.registerEmail.text.toString()
         val passwordRegister = binding.registerPassword.text.toString()
+        val nameRegister = binding.userName.text.toString()
+        val user = User(emailRegister,passwordRegister,nameRegister)
         val registerBotao = binding.registerButton
 
 
-        binding.registerButton.setOnClickListener {
-            val sharedPreferences = getSharedPreferences("REGISTRO", MODE_PRIVATE)
-            val editor = sharedPreferences.edit()
 
-            editor.putString("EMAIL", emailRegister)
-            editor.putString("PASSWORD", passwordRegister)
+        registerBotao.setOnClickListener {
+            val sharedPreferences = getSharedPreferences("User_response", MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            val gson = Gson()
+            val saveUser = gson.toJson(user)
+            editor.putString("user_response",saveUser)
             editor.apply()
 
             startActivity(Intent(this@CadastroActivity,LoginActivity::class.java))
